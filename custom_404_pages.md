@@ -144,7 +144,7 @@ ErrorDocument 500 /500.php
 
 **Find**
 
-   ```php
+   ```html
       <?php } else if ($page == 'strikes') { ?>
    ```
 
