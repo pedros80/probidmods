@@ -31,7 +31,7 @@ VALUES ('default text', 'default_text');```
 
 `/.htaccess`
 
-*Add*
+**Add**
 
 `ErrorDocument 404 /404.php`
 `ErrorDocument 500 /500.php`
@@ -39,7 +39,7 @@ VALUES ('default text', 'default_text');```
 
 `/includes/functions.php`
 
-*Add*
+**Add**
 
 ```function curPageURL() {
    $pageURL = 'http';
@@ -56,7 +56,7 @@ VALUES ('default text', 'default_text');```
 
 `/ADMIN_DIRECTORY/templates/index.tpl.php`
 
-*Find*
+**Find**
 
  ```<div class="mainhead"><img src="images/set.gif" align="absmiddle"><?php echo AMSG_GENERAL_SETTINGS;?></div>
          <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -70,21 +70,21 @@ VALUES ('default text', 'default_text');```
             <tr>
                <td width="100%" class="menulink">```
 
-*Below Add*
+**Below Add**
 
 ```<img src="images/a.gif" align="absmiddle" vspace="2"> <a href="general_settings.php?page=404_text">404 page text</a><br>
 <img src="images/a.gif" align="absmiddle" vspace="2"> <a href="general_settings.php?page=500_text">500 page text</a><br>```
 
 
 
-*/ADMIN_DIRECTORY/general_settings.php*
+**/ADMIN_DIRECTORY/general_settings.php**
 
-*Find*
+**Find**
 
 ```switch ($_REQUEST['page'])
 {```
 
-*Below Add*
+**Below Add**
 
    ```case '404_text':
       $sql_update_404 = $db->query("UPDATE ".DB_PREFIX."server_error_text SET
@@ -96,7 +96,7 @@ VALUES ('default text', 'default_text');```
       break;```
 
 
-*Find*
+**Find**
 
    ```$template->set('setts_tmp', $setts_tmp);
    $template->set('layout_tmp', $layout_tmp);
@@ -105,7 +105,7 @@ VALUES ('default text', 'default_text');```
 
 Below Add
 
-   $template->set('text_tmp', $db->get_sql_row("SELECT * FROM ".DB_PREFIX."server_error_text"));
+   $template->set('text_tmp', $db->get_sql_row("SELECT ** FROM ".DB_PREFIX."server_error_text"));
    if ($_REQUEST['page'] == '404_text')
    {
       $header_section = AMSG_GENERAL_SETTINGS;
