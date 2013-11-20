@@ -17,10 +17,12 @@ custom contnent without the need to write any actual markup.
 
 ### MySQL operations
 
-```CREATE TABLE probid_server_error_text(
+```
+   CREATE TABLE probid_server_error_text(
    404_text text,
    500_text text
-);```
+);
+```
 
 
 ```INSERT INTO probid_server_error_text (404_text, 500_text)
