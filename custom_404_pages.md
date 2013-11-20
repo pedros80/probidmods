@@ -171,7 +171,7 @@ ErrorDocument 500 /500.php
       </tr>
    ```
 
-## `/ADMIN_DIRECTORY/templates/leftmenu.tpl.php`
+### `/ADMIN_DIRECTORY/templates/leftmenu.tpl.php`
 
 **Find**
 
@@ -195,9 +195,9 @@ ErrorDocument 500 /500.php
 
 ## New Files
 
-### add to root ADMIN_DIRECTORY
+### add to root directory
 
-## `/404.php`
+### `/404.php`
 
 ```php
 <?php
@@ -233,7 +233,7 @@ echo $template_output;
 ?>
 ```
 
-## `/500.php`
+### `/500.php`
 
 ```php
 <?php
