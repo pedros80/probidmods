@@ -17,7 +17,7 @@ custom contnent without the need to write any actual markup.
 
 ### MySQL operations
 
-```
+```sql
    CREATE TABLE probid_server_error_text(
       404_text text,
       500_text text
@@ -25,8 +25,10 @@ custom contnent without the need to write any actual markup.
 ```
 
 
-```INSERT INTO probid_server_error_text (404_text, 500_text)
-VALUES ('default text', 'default_text');```
+```
+INSERT INTO probid_server_error_text (404_text, 500_text)
+VALUES ('default text', 'default_text');
+```
 
 
 ## File operations
