@@ -29,19 +29,21 @@ VALUES ('default text', 'default_text');```
 
 ## File operations
 
-`/.htaccess`
+----------------------------
+/.htaccess
 
-*Add*
+Add
 
 `ErrorDocument 404 /404.php`
 `ErrorDocument 500 /500.php`
 
+-----------------------------
 
-`/includes/functions.php`
+/includes/functions.php
 
-*Add*
+Add
 
-```function curPageURL() {
+function curPageURL() {
    $pageURL = 'http';
    if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
       $pageURL .= "://";
@@ -51,14 +53,14 @@ VALUES ('default text', 'default_text');```
       $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
    }
    return $pageURL;
-}```
+}
+-----------------------------
 
+/ADMIN_DIRECTORY/templates/index.tpl.php
 
-`/ADMIN_DIRECTORY/templates/index.tpl.php`
+Find
 
-*Find*
-
- ```<div class="mainhead"><img src="images/set.gif" align="absmiddle"><?php echo AMSG_GENERAL_SETTINGS;?></div>
+ <div class="mainhead"><img src="images/set.gif" align="absmiddle"><?php echo AMSG_GENERAL_SETTINGS;?></div>
          <table width="100%" border="0" cellpadding="0" cellspacing="0">
             <tr>
                <td width="4"><img src="images/c1.gif" width="4" height="4"></td>
@@ -68,39 +70,39 @@ VALUES ('default text', 'default_text');```
          </table>
          <table width="100%" border="0" cellpadding="2" cellspacing="2" class="fside">
             <tr>
-               <td width="100%" class="menulink">```
+               <td width="100%" class="menulink">
 
-*Below Add*
+Below Add
 
-```<img src="images/a.gif" align="absmiddle" vspace="2"> <a href="general_settings.php?page=404_text">404 page text</a><br>
-<img src="images/a.gif" align="absmiddle" vspace="2"> <a href="general_settings.php?page=500_text">500 page text</a><br>```
+                  <img src="images/a.gif" align="absmiddle" vspace="2"> <a href="general_settings.php?page=404_text">404 page text</a><br>
+                  <img src="images/a.gif" align="absmiddle" vspace="2"> <a href="general_settings.php?page=500_text">500 page text</a><br>
 
+------------------------------
 
+/ADMIN_DIRECTORY/general_settings.php
 
-*/ADMIN_DIRECTORY/general_settings.php*
+Find
 
-*Find*
+switch ($_REQUEST['page'])
+{
 
-```switch ($_REQUEST['page'])
-{```
+Below Add
 
-*Below Add*
-
-   ```case '404_text':
+   case '404_text':
       $sql_update_404 = $db->query("UPDATE ".DB_PREFIX."server_error_text SET
          404_text='".$db->add_special_chars($_POST['404_text'])."'");
       break;
    case '500_text':
       $sql_update_500 = $db->query("UPDATE ".DB_PREFIX."server_error_text SET
          500_text='".$db->add_special_chars($_POST['500_text'])."'");
-      break;```
+      break;
 
 
-*Find*
+Find
 
-   ```$template->set('setts_tmp', $setts_tmp);
+   $template->set('setts_tmp', $setts_tmp);
    $template->set('layout_tmp', $layout_tmp);
-   $template->set('page', $_REQUEST['page']);```
+   $template->set('page', $_REQUEST['page']);
 
 
 Below Add
