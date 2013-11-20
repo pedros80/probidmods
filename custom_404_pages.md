@@ -82,30 +82,34 @@ ErrorDocument 500 /500.php
 
 **Below Add**
 
-```php
+```html
 <img src="images/a.gif" align="absmiddle" vspace="2"> <a href="general_settings.php?page=404_text">404 page text</a><br>
 <img src="images/a.gif" align="absmiddle" vspace="2"> <a href="general_settings.php?page=500_text">500 page text</a><br>
 ```
 
 
 
-**/ADMIN_DIRECTORY/general_settings.php**
+###`/ADMIN_DIRECTORY/general_settings.php`
 
 **Find**
 
-```switch ($_REQUEST['page'])
-{```
+```php
+   switch ($_REQUEST['page'])
+   {
+```
 
 **Below Add**
 
-   ```case '404_text':
+   ```php
+   case '404_text':
       $sql_update_404 = $db->query("UPDATE ".DB_PREFIX."server_error_text SET
          404_text='".$db->add_special_chars($_POST['404_text'])."'");
       break;
    case '500_text':
       $sql_update_500 = $db->query("UPDATE ".DB_PREFIX."server_error_text SET
          500_text='".$db->add_special_chars($_POST['500_text'])."'");
-      break;```
+      break;
+```
 
 
 **Find**
