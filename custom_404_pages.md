@@ -62,26 +62,30 @@ ErrorDocument 500 /500.php
 ```
 
 
-`/ADMIN_DIRECTORY/templates/index.tpl.php`
+### `/ADMIN_DIRECTORY/templates/index.tpl.php`
 
 **Find**
 
- ```<div class="mainhead"><img src="images/set.gif" align="absmiddle"><?php echo AMSG_GENERAL_SETTINGS;?></div>
-         <table width="100%" border="0" cellpadding="0" cellspacing="0">
-            <tr>
-               <td width="4"><img src="images/c1.gif" width="4" height="4"></td>
-               <td width="100%" class="ftop"><img src="images/pixel.gif" width="1" height="1"></td>
-               <td width="4"><img src="images/c2.gif" width="4" height="4"></td>
-            </tr>
-         </table>
-         <table width="100%" border="0" cellpadding="2" cellspacing="2" class="fside">
-            <tr>
-               <td width="100%" class="menulink">```
+ ```html
+   <div class="mainhead"><img src="images/set.gif" align="absmiddle"><?php echo AMSG_GENERAL_SETTINGS;?></div>
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+         <tr>
+            <td width="4"><img src="images/c1.gif" width="4" height="4"></td>
+            <td width="100%" class="ftop"><img src="images/pixel.gif" width="1" height="1"></td>
+            <td width="4"><img src="images/c2.gif" width="4" height="4"></td>
+         </tr>
+      </table>
+      <table width="100%" border="0" cellpadding="2" cellspacing="2" class="fside">
+         <tr>
+            <td width="100%" class="menulink">
+```
 
 **Below Add**
 
-```<img src="images/a.gif" align="absmiddle" vspace="2"> <a href="general_settings.php?page=404_text">404 page text</a><br>
-<img src="images/a.gif" align="absmiddle" vspace="2"> <a href="general_settings.php?page=500_text">500 page text</a><br>```
+```php
+<img src="images/a.gif" align="absmiddle" vspace="2"> <a href="general_settings.php?page=404_text">404 page text</a><br>
+<img src="images/a.gif" align="absmiddle" vspace="2"> <a href="general_settings.php?page=500_text">500 page text</a><br>
+```
 
 
 
