@@ -19,9 +19,9 @@ custom contnent without the need to write any actual markup.
 
 ```
    CREATE TABLE probid_server_error_text(
-   404_text text,
-   500_text text
-);
+      404_text text,
+      500_text text
+   );
 ```
 
 
