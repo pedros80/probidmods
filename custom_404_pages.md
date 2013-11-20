@@ -150,7 +150,7 @@ ErrorDocument 500 /500.php
 
 **Above Add**
 
-   ```php
+   ```html
     <?php } else if ($page == '404_text'){ ?>
        <tr class="c1">
          <td width="200" align="right">Text For 404 error page</td>
