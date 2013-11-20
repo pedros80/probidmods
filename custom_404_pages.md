@@ -139,15 +139,18 @@ ErrorDocument 500 /500.php
    }
    ```
 
------------------------------
-/ADMIN_DIRECTORY/templates/general_settings.tpl.php
 
-Find
+##`/ADMIN_DIRECTORY/templates/general_settings.tpl.php`
 
+**Find**
+
+   ```php
       <?php } else if ($page == 'strikes') { ?>
+   ```
 
-Above Add
+**Above Add**
 
+    ```php
     <?php } else if ($page == '404_text'){ ?>
        <tr class="c1">
          <td width="200" align="right">Text For 404 error page</td>
@@ -166,13 +169,13 @@ Above Add
          <td align="right" class="explain"><img src="images/info.gif"></td>
          <td class="explain">The text and markup which will be displayed on a 500 server error</td>
       </tr>
+   ```
 
+## `/ADMIN_DIRECTORY/templates/leftmenu.tpl.php`
 
------------------------------
-/ADMIN_DIRECTORY/templates/leftmenu.tpl.php
+**Find**
 
-Find
-
+```html
 <td class="atitle" width="170"><?php echo AMSG_GEN_SETTS;?></td><td align="center" class="sh" width="50"><a title="show/hide" class="hidelayer" id="exp1_link" href="javascript: void(0);" onclick="toggle(this, 'exp1')">hide</a></td>
    </tr>
    <tr>
@@ -180,21 +183,23 @@ Find
          <div id="exp1" style="padding: 5px;">
             <div><img src="images/subtop.gif" width="208" height="4"></div>
             <div class="fsidew">
+```
 
-Below Add
+**Below Add**
 
-                <div class="alink"><a href="general_settings.php?page=404_text">404 page text</a></div>
-                <div class="alink"><a href="general_settings.php?page=500_text">500 page text</a></div>
+```html
+   <div class="alink"><a href="general_settings.php?page=404_text">404 page text</a></div>
+   <div class="alink"><a href="general_settings.php?page=500_text">500 page text</a></div>
+```
 
-
------------------------------
 
 ## New Files
 
 ### add to root ADMIN_DIRECTORY
 
-/404.php
+## `/404.php`
 
+```php
 <?php
 #################################################################
 ## Custom page for 404 error                                   ##
@@ -226,10 +231,11 @@ include_once ('global_footer.php');
 echo $template_output;
 
 ?>
+```
 
+## `/500.php`
 
-/500.php
-
+```php
 <?php
 #################################################################
 ## Custom page for 500 error                                   ##
@@ -260,4 +266,4 @@ include_once ('global_footer.php');
 echo $template_output;
 
 ?>
-
+```
