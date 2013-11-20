@@ -25,7 +25,7 @@ custom contnent without the need to write any actual markup.
 ```
 
 
-```
+```sql
 INSERT INTO probid_server_error_text (404_text, 500_text)
 VALUES ('default text', 'default_text');
 ```
@@ -33,15 +33,17 @@ VALUES ('default text', 'default_text');
 
 ## File operations
 
-`/.htaccess`
+### `/.htaccess`
 
 **Add**
 
-`ErrorDocument 404 /404.php`
-`ErrorDocument 500 /500.php`
+```
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
+```
 
 
-`/includes/functions.php`
+### `/includes/functions.php`
 
 **Add**
 
