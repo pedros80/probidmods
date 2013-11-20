@@ -114,13 +114,17 @@ ErrorDocument 500 /500.php
 
 **Find**
 
-   ```$template->set('setts_tmp', $setts_tmp);
+   ```php
+   $template->set('setts_tmp', $setts_tmp);
    $template->set('layout_tmp', $layout_tmp);
-   $template->set('page', $_REQUEST['page']);```
+   $template->set('page', $_REQUEST['page']);
+   ```
 
 
-Below Add
+**Below Add**
 
+   
+   ```php
    $template->set('text_tmp', $db->get_sql_row("SELECT ** FROM ".DB_PREFIX."server_error_text"));
    if ($_REQUEST['page'] == '404_text')
    {
@@ -133,6 +137,7 @@ Below Add
       $header_section = AMSG_GENERAL_SETTINGS;
       $subpage_title = 'Text for custom 500 error page';
    }
+   ```
 
 -----------------------------
 /ADMIN_DIRECTORY/templates/general_settings.tpl.php
