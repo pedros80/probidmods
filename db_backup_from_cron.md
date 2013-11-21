@@ -1,29 +1,101 @@
+## PHP Probid - Backup Database From Cron
+[Peter Somerville 2013](http://www.pedros-stuffs.com) - peterwsomerville@gmail.com
 
-database backup from cron
+### License
+GNU GPL - See LICENSE.txt for more information
 
-    (i had a wee look to see if ray offers something similar. couldn't find anything so posting this here. if this is treading on anyone's toes feel free to remove...)
 
-    this mod will create a gzipped db backup once a day with the naming convention your_db_nameDayName.gz (if gzip is installed/enabled on your server; your_db_nameDayName.sql if not). These are then stored in your_site/cron_jobs/db_dumps/
+### About
+This mod allows the administrator to activate a daily backup of their main database.
 
-    first create the directory /cron_jobs/db_dumps/ and give it permissions to allow apache to create files.
+The backup can be optionally gzipped to save space and is stored in a protected directory on the server
 
-    add the following fields to DB_PREFIX.gen_setts
+### Installation
 
-    Code:
+First create the directory `/cron_jobs/db_dumps/` and give it permissions to allow apache to create files.
 
-    ALTER TABLE `pitmart_gen_setts` ADD `enable_db_backup` TINYINT( 1 ) NOT NULL DEFAULT '0';
+### MySQL Operations
+
+
+```sql 
+	ALTER TABLE `pitmart_gen_setts` ADD `enable_db_backup` TINYINT( 1 ) NOT NULL DEFAULT '0;
     ALTER TABLE `pitmart_gen_setts` ADD `gzip_db_backup` TINYINT( 1 ) NOT NULL DEFAULT '0';
+```
 
-    add the following file to /cron_jobs/ with the name dbdump.php
 
-    Code:
+### File Operations
 
-    <?php 
+### `/cron_jobs/main_cron_daily.php`
+
+**After `include`s at top of file**
+
+**Add**
+
+```php
+    if ($setts['enable_db_backup']) {
+       require 'dbdump.php';
+
+       $dbBU = new dbBackup($db_host, $db_username, $db_password, $db_name);
+       $dbBU->setts = $setts;
+       $dbBU->databaseDump();
+    }
+```
+
+
+### `/ADMIN_DIRECTORY/templates/index.tpl.php`
+
+
+**Find**
+
+```html
+    <img src="images/a.gif" align="absmiddle" vspace="2"> <a href="word_filter.php"><?php echo AMSG_WORD_FILTER;?></a> <br>
+```
+
+**Above Add**
+
+```html
+    <img src="images/a.gif" align="absmiddle" vspace="2"> <a href="db_backup.php">Cron DB Backup</a> <br>
+```
+
+### `/ADMIN_DIRECTORY/templates/leftmenu.tpl.php`
+
+**Find**
+
+```html
+	<div class="fsidew">
+```
+
+**Below Add**
+
+```html
+	<div class="alink"><a href="db_backup.php">Cron DB Backup</a></div>
+```
+
+**Find**
+
+```php
+    stristr($_SERVER['PHP_SELF'], "word_filter.php")||
+```
+
+**Above Add**
+
+```php
+    stristr($_SERVER['PHP_SELF'], "db_backup.php")||
+```
+
+## New Files
+
+### `/cron_jobs/dbdump.php`
+
+
+```php
+
+<?php
 
     /**
      * dbBackup used by main_cron_daily to write a database backup
      * to site/cron_jobs/db_dumps. If gzip compression is available,
-     * use it on backup file. 
+     * use it on backup file.
      */
 
     class dbBackup {
@@ -64,37 +136,14 @@ database backup from cron
 
     }
     ?>
-
-    in file cron_jobs/main_cron_daily.php, near the top, after the "include"s add
-
-    Code:
-
-    if ($setts['enable_db_backup']) {
-       require 'dbdump.php';
-
-       $dbBU = new dbBackup($db_host, $db_username, $db_password, $db_name);
-       $dbBU->setts = $setts;
-       $dbBU->databaseDump();
-    }
+```
 
 
-    to /admin/
-    add the following file db_backup.php
+### `/ADMIN_DIRECTORY/db_backup.php`
 
-    Code:
-
-    <?php
-    #################################################################
-    ## PHP Pro Bid v6.10                                           ##
-    ##-------------------------------------------------------------##
-    ## Copyright ©2007 PHP Pro Software LTD. All rights reserved.  ##
-    ##-------------------------------------------------------------##
-    #################################################################
-
+```php
+<?php
     session_start();
-
-    #error_reporting(E_ALL);
-    #ini_set('display_errors', '1');
 
     define ('IN_ADMIN', 1);
     define ('IN_SITE', 1);
@@ -140,17 +189,15 @@ database backup from cron
        echo $template_output;
     }
     ?>
+```
 
 
-    to /admin/templates/
+### `/ADMIN_DIRECTORY/templates/db_backup.tpl.php`
 
-    add the following file named db_backup.tpl.php
-
-    Code:
-
-    <?php
+```html
+ <?php
     #################################################################
-    ## PHP Pro Bid v6.10                                             ##
+    ## PHP Pro Bid v6.10 ##
     ##-------------------------------------------------------------##
     ## Copyright ©2007 PHP Pro Software LTD. All rights reserved. ##
     ##-------------------------------------------------------------##
@@ -175,9 +222,9 @@ database backup from cron
       <tr class="c1">
           <td width="200" align="right"><b>Enable database backup?</b></td>
           <td>
-             <input type="radio" name="enable_db_backup" id="enable_db_backup_yes" value="1" <?php echo ($setts_tmp['enable_db_backup'] == 1) ?  'checked="checked"' : '' ;?>>
+             <input type="radio" name="enable_db_backup" id="enable_db_backup_yes" value="1" <?php echo ($setts_tmp['enable_db_backup'] == 1) ? 'checked="checked"' : '' ;?>>
              <label for="enable_db_backup_yes"><?php echo GMSG_YES;?></label>
-             <input type="radio" name="enable_db_backup" id="enable_db_backup_no" value="0" <?php echo ($setts_tmp['enable_db_backup'] == 0) ?  'checked="checked"' : '' ;?>>
+             <input type="radio" name="enable_db_backup" id="enable_db_backup_no" value="0" <?php echo ($setts_tmp['enable_db_backup'] == 0) ? 'checked="checked"' : '' ;?>>
              <label for="enable_db_backup_no"><?php echo GMSG_NO;?></label>
           </td>
        </tr>
@@ -197,7 +244,7 @@ database backup from cron
        <tr>
           <td class="explain" align="right"><img src="images/info.gif"></td>
           <td class="explain">
-             If the zlib module is installed and enabled on the server the file can be optionally gzipped so it will take up less space on the server. 
+             If the zlib module is installed and enabled on the server the file can be optionally gzipped so it will take up less space on the server.
              <br>If this option is selected and zlib is enabled the <b><?php echo $file_name;?>.sql</b> file will be replaced by the gzipped version.
              <br>zlib module is currently <b><?php echo ($zlib_enabled) ? 'enabled' : 'disabled';?></b> on this server.
           </td>
@@ -214,61 +261,13 @@ database backup from cron
           <td width="4"><img src="images/c4.gif" width="4" height="4"></td>
        </tr>
     </table>
+```
 
 
-    in admin/templates/index.tpl.php find
-    Code:
+### `/cron_jobs/.htaccess`
 
-    <img src="images/a.gif" align="absmiddle" vspace="2"> <a href="word_filter.php"><?php echo AMSG_WORD_FILTER;?></a> <br>
-
-    and above add
-    Code:
-
-    <img src="images/a.gif" align="absmiddle" vspace="2"> <a href="db_backup.php">Cron DB Backup</a> <br>
-
-    in admin/templates/leftmenu.tpl.php find
-    Code:
-
-    <div class="alink"><a href="db_backup.php">Cron DB Backup</a></div>
-
-    and above add
-    Code:
-
-    <div class="alink"><a href="db_backup.php">Cron DB Backup</a></div>
-
-
-    find
-    Code:
-
-    stristr($_SERVER['PHP_SELF'], "word_filter.php")||
-
-    and above add
-
-    Code:
-
-    stristr($_SERVER['PHP_SELF'], "db_backup.php")||
-
-
-
-    you'll also want to restrict access to your cron_jobs directory (i forget if this is included in the stock probid or something i've added myself at somepoint...) to stop malicious use of your cron files and unauthorised access to your dumps.
-
-    add the following file to your cron_jobs directory named .htaccess (or append if you already have a .htaccess file...) and add your server's ip address.
-
-    Code:
-
+```
     deny from all
-    allow from your.server's.ip.address
+    allow from YOUR.SERVER.IP.ADDRESS
     allow from 127.0.0.1
-
-    if you are using a vcs to maintain local/remote sites you might want to add an ignore rule for the db_dumps directory/files.
-
-    this is has been tested on linux servers with gz enabled and disabled with the db_dumps directory owned by www-data.
-
-    if anyone has any comments/suggestions etc please leave them here. there shouldn't be anything dangerous to your code base or any glaringly obvious security risks/holes but i provide zero guarantee; test for yourself...
-
-    when i get a bit more time i'll add in some admin functions to enable/disable, set the location to save to the dump to etc.
-
-    hope this helps someone!
-
-    edit: enable/disable backup. enable/disable gzip compression. 
-
+```
