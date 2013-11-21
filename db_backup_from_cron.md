@@ -18,8 +18,8 @@ First create the directory `/cron_jobs/db_dumps/` and give it permissions to all
 
 
 ```sql 
-	ALTER TABLE `pitmart_gen_setts` ADD `enable_db_backup` TINYINT( 1 ) NOT NULL DEFAULT '0;
-    ALTER TABLE `pitmart_gen_setts` ADD `gzip_db_backup` TINYINT( 1 ) NOT NULL DEFAULT '0';
+	ALTER TABLE `pitmart_gen_setts` ADD `enable_db_backup` TINYINT( 1 ) NOT NULL DEFAULT '0';
+  ALTER TABLE `pitmart_gen_setts` ADD `gzip_db_backup` TINYINT( 1 ) NOT NULL DEFAULT '0';
 ```
 
 
@@ -196,12 +196,6 @@ First create the directory `/cron_jobs/db_dumps/` and give it permissions to all
 
 ```html
  <?php
-    #################################################################
-    ## PHP Pro Bid v6.10 ##
-    ##-------------------------------------------------------------##
-    ## Copyright ©2007 PHP Pro Software LTD. All rights reserved. ##
-    ##-------------------------------------------------------------##
-    #################################################################
 
     if ( !defined('INCLUDED') ) { die("Access Denied"); }
     ?>
